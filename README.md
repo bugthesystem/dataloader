@@ -5,18 +5,19 @@
 ### Usage
 
 ```scala
-      val identityLoader = new DataLoader[Int, Int](
-        batchLoadFn = (keys: Array[Int]) => Some(Promise().success(keys))
-      )
+val loader = new DataLoader[Int, Int](
+   batchLoadFn = (keys: Array[Int]) => Some(Promise().success(keys))
+)
 
-      val f: Future[Int] = identityLoader.load(1)
+val f: Future[Int] = loader.load(1)
 
-      val value: Int = Await.result(f, 1.seconds)
+val value: Int = Await.result(f, 1.seconds)
 
-      println(s"Resolved value: $value")
+println(s"Resolved value: $value")
 ```
-
 
 ### Credits
 > TODO:
+
+
 @z i λ a s a l
