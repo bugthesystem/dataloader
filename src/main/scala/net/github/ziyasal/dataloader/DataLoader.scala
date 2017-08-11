@@ -6,7 +6,6 @@ import scala.concurrent.{Future, Promise}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
-
 // Wait `dotty` for union types :(
 // V | Exception
 
@@ -35,7 +34,7 @@ class DataLoader[K: ClassTag, V](
     if (shouldCache) {
       val cachedPromiseOpt: Option[Promise[V]] = promiseCache.get(cacheKey)
       cachedPromiseOpt match {
-        case Some(cachedPromise) => cachedPromise.future
+        case Some(cachedPromise) => return cachedPromise.future
         case _                   => {}
       }
     }
@@ -135,7 +134,7 @@ class DataLoader[K: ClassTag, V](
 
     // If a maxBatchSize was provided and the queue is longer, then segment the
     // queue into multiple batches, otherwise treat the queue as a single batch.
-    var maxBatchSizeOpt = loader.options.maxBatchSize
+    val maxBatchSizeOpt = loader.options.maxBatchSize
 
     maxBatchSizeOpt match {
       case Some(maxBatchSize) => {
@@ -152,7 +151,9 @@ class DataLoader[K: ClassTag, V](
         }
 
       }
-      case None => {}
+      case None => {
+        dispatchQueueBatch(loader, queue)
+      }
     }
   }
 

@@ -1,7 +1,6 @@
 import net.github.ziyasal.dataloader.DataLoader
 import org.scalatest.{FunSpec, Matchers}
-import scala.concurrent.duration.DurationInt
-
+import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Await, Future, Promise}
 
@@ -17,9 +16,7 @@ class DataLoaderTest extends FunSpec with Matchers {
 
       f.isInstanceOf[Future[Int]] shouldBe true
 
-      val value: Int = Await.result(f, 5.seconds)
-
-      println(s"Resolved value: $value")
+      val value: Int = Await.result(f, 1.seconds)
 
       value shouldBe 1
     }

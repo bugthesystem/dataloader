@@ -10,9 +10,9 @@ class CacheMap[K, V] {
 
     if (promiseCache.contains(key)) {
       Some(promiseCache(key))
+    } else {
+      None
     }
-
-    None
   }
 
   def has(key: K): Boolean = {
