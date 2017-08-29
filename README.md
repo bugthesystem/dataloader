@@ -17,7 +17,7 @@ println(s"Resolved value: $result")
 ```
 
 ### Credits
-> TODO:
+> https://github.com/facebook/dataloader
 
 
 @z i λ a s a l
